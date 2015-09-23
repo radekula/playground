@@ -15,20 +15,20 @@ class Error : public std::exception
 {
 private:
 	bool m_with_code;
-    long m_code;
-    std::string m_message;
+	long m_code;
+	std::string m_message;
 
 public:
 	Error();
-	Error(std::string message);
-	Error(std::string message, long code);
-	~Error() throw() {};
+	Error(const std::string message);
+	Error(const std::string message, long code);
+	~Error() noexcept {};
 	
-	virtual void SetMessage(std::string message);
-	virtual void SetCode(long code);
+	void SetMessage(const std::string message);
+	void SetCode(long code);
 	
-	virtual const char* what() const throw() { return m_message.c_str(); };
-	virtual long code() { return m_code; };
+	const char* what() const throw() { return m_message.c_str(); };
+	long code() { return m_code; };
 };
 
 
