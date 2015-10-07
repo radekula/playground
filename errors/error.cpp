@@ -46,4 +46,39 @@ void Error::SetCode(long code)
 };
 
 
+    
+
+void ErrorLog::Log(MessageType type, Error &err)
+{
+	for(auto stream = m_streams.begin(); stream != m_streams.end(); stream++)
+	{
+		if(stream->message_types & type)
+			*(stream->stream) << err.what();
+	};
+};
+
+
+
+
+long ErrorLog::OpenLog(std::string file_path, MessageType messages_type)
+{	
+	return 0;
+};
+
+
+
+void ErrorLog::CloseLog(long log_id)
+{
+	for(auto stream = m_streams.begin(); stream != m_streams.end(); stream++)
+	{
+		if(stream->id == log_id)
+		{
+			stream->stream->close();
+			m_streams.erase(stream);
+		};
+	};
+};
+
+
+
 }
