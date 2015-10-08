@@ -3,12 +3,16 @@
 
 
 #include <string>
+#include <memory>
+#include <iostream>
+#include <vector>
+#include <fstream>
 #include <exception>
 
 
 namespace err {
 
-enum ErrorType { UNKNOWN = 2 << 0, ERROR = 2 << 1, WARNING = 2 << 2, NOTICE = 2 << 3 };
+enum MessageType { UNKNOWN = 2 << 0, ERROR = 2 << 1, WARNING = 2 << 2, NOTICE = 2 << 3 };
 
 
 class Error : public std::exception
@@ -33,22 +37,29 @@ public:
 
 
 
-/*
+struct LogStream
+{
+	long id = 0;
+	unsigned short message_types = 0;
+	std::shared_ptr<std::ofstream> stream;
+};
+
+
+
+
 class ErrorLog
 {
 private:
-    
+	std::vector<LogStream> m_streams;
 
 public:
-    ErrorLog();
-    ~ErrorLog();
+    void Log(MessageType type, Error &err);
 
 public:
-    bool Log(Error &err);
-    bool OpenLog();
-    bool CloseLog();
-}
-*/
+    long OpenLog(std::string file_path, MessageType messages_type);
+    void CloseLog(long log_id);
+};
+
 
 }
 
