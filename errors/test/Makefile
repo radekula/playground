@@ -1,5 +1,5 @@
 CC=gcc
-CFLAGS=-c -std=c++14
+CFLAGS=-c -std=c++14 -I../include
 CLIBS=-lstdc++ -L../. -lerrors
 OBJ_DIR=obj
 BIN_NAME=error_test
