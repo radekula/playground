@@ -1,6 +1,7 @@
 #include "error.h"
 
 
+
 namespace err {
 
 
@@ -82,3 +83,20 @@ void ErrorLog::CloseLog(long log_id)
 
 
 }
+
+
+#ifdef COMPILE_WITH_TESTS 
+
+#define BOOST_TEST_DYN_LINK
+#define BOOST_TEST_NO_MAIN
+#include <boost/test/unit_test.hpp>
+
+
+
+BOOST_AUTO_TEST_CASE( example )
+{
+    BOOST_CHECK_EQUAL( 2 + 2, 4 );
+};
+
+
+#endif
